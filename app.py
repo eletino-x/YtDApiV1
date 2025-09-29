@@ -7,7 +7,12 @@ app = Flask(__name__)
 def download():
     url = request.args.get("url")
     if not url:
-        return jsonify({"error": "Bitte URL mitgeben, z.B. /download?url=..."}), 400
+        return jsonify({"error": "Bitte URL mitgeben"}), 400
+
+    # kurze Links normalisieren
+    if "youtu.be/" in url:
+        url = url.split("?")[0]
+
     try:
         yt = YouTube(url)
         stream = yt.streams.get_highest_resolution()
