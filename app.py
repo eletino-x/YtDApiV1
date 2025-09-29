@@ -14,6 +14,7 @@ def download():
         url = url.split("?")[0]
 
     try:
+        return jsonify({"uhh idk"})
         yt = YouTube(url)
         stream = yt.streams.get_highest_resolution()
         return jsonify({
